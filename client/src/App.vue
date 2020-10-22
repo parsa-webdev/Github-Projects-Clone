@@ -1,7 +1,9 @@
 <template>
-  <v-app>
-    <Header />
-    <router-view></router-view>
+  <v-app :style="{ background: $vuetify.theme.themes.light.background }">
+    <div class="pt-16 pb-8">
+      <Header />
+      <router-view></router-view>
+    </div>
   </v-app>
 </template>
 

@@ -1,12 +1,15 @@
 import axios from "axios";
 
 const state = {
-  user: null,
-  isLoggedIn: false,
+  user: {
+    username: "Abir",
+  },
+  isLoggedIn: true,
   authenticating: false,
   verifyingUser: false,
   errors: null,
 };
+
 const getters = {
   isLoggedIn: (state) => state.isLoggedIn,
   authenticating: (state) => state.authenticating,
@@ -14,34 +17,20 @@ const getters = {
   verifyingUser: (state) => state.verifyingUser,
   user: (state) => state.user,
 };
+
 const actions = {
-  async login({ commit }, userInput) {
-    try {
-      commit("authenticating", null);
-
-      const res = await axios.post("auth/login", userInput);
-
-      commit("authenticated", res.data);
-    } catch (err) {
-      commit("setErrors", { login: err.response.data.error.message });
-    }
+  login({ commit }, args) {
+    console.log(args);
   },
-  async register({ commit }, userInput) {
-    try {
-      commit("authenticating", null);
-
-      const res = await axios.post("auth/register", userInput);
-
-      commit("authenticated", res.data);
-    } catch (err) {
-      commit("setErrors", { register: err.response.data.error.message });
-    }
+  register({ commit }, args) {
+    console.log(args);
   },
   logout({ commit }) {
     console.log("logout");
     commit("logout", null);
   },
 };
+
 const mutations = {
   verifyingUser: (state, value) => {
     state.verifyingUser = true;
