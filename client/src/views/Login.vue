@@ -26,7 +26,7 @@
         <v-btn
           type="submit"
           color="primary"
-          class="mb-8"
+          class="mb-8 black--text"
           large
           block
           elevation="0"
@@ -45,8 +45,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "Login",
+
   data() {
     return {
       valid: false,

@@ -15,8 +15,13 @@
             </v-card-text>
 
             <v-fade-transition>
-              <v-overlay v-if="hover" absolute color="white">
-                <v-btn color="primary" elevation="2">OPEN PROJECT</v-btn>
+              <v-overlay v-if="hover" absolute color="primary">
+                <v-btn
+                  :to="{ name: 'EachProject', params: { id: project.id } }"
+                  class="primary--text"
+                  elevation="2"
+                  >OPEN PROJECT</v-btn
+                >
               </v-overlay>
             </v-fade-transition>
           </v-card>

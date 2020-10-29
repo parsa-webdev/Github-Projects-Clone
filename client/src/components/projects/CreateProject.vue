@@ -20,7 +20,7 @@
       <v-btn
         type="submit"
         :disabled="!valid"
-        color="primary"
+        color="primary black--text"
         large
         block
         elevation="0"

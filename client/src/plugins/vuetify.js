@@ -6,13 +6,14 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
+    dark: true,
     themes: {
-      light: {
-        primary: "#2b9cff",
+      dark: {
+        primary: "#69F0AE",
         // secondary: "#BEE1F8",
         // accent: "#8c9eff",
         // error: "#b71c1c",
-        background: "#DDEAF6",
+        // background: "#DDEAF6",
       },
     },
   },

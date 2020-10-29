@@ -34,7 +34,7 @@
         <v-btn
           type="submit"
           color="primary"
-          class="mb-8"
+          class="mb-8 black--text"
           large
           block
           elevation="0"
