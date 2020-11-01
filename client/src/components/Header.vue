@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar max-height="400" elevation="0" fixed>
+    <v-app-bar max-height="400" elevation="0" fixed style="z-index: 20">
       <v-container>
         <v-row>
           <router-link to="/">
@@ -9,52 +9,32 @@
 
           <v-spacer></v-spacer>
 
-          <template v-if="isLoggedIn">
-            <v-row class=" justify-end align-center">
-              <v-btn
-                to="/dashboard"
-                color="primary"
-                class="ml-4 hidden-sm-and-down"
-                text
-              >
-                dashboard
+          <template v-if="!verifyingUser">
+            <v-app-bar-nav-icon
+              small
+              class="ml-4 hidden-sm-and-up"
+              @click="toggleDrawer(true)"
+            ></v-app-bar-nav-icon>
+            <div v-if="isLoggedIn" class="hidden-xs-only">
+              <v-btn to="/create" color="primary" class="ml-4" text>
+                Create
               </v-btn>
               <v-btn
                 @click="logout"
                 elevation="0"
                 class="ml-4"
-                color="primary black--text  hidden-sm-and-down"
+                color="primary black--text"
                 >log out</v-btn
               >
-              <v-app-bar-nav-icon
-                small
-                class="ml-4 hidden-md-and-up"
-                @click="toggleDrawer(true)"
-              ></v-app-bar-nav-icon>
-            </v-row>
-          </template>
-          <template v-else>
-            <v-btn
-              to="/register"
-              color="primary"
-              class="ml-4  hidden-sm-and-down"
-              text
-            >
-              register
-            </v-btn>
-            <v-btn
-              to="/login"
-              color="primary"
-              class="ml-4  hidden-sm-and-down"
-              text
-            >
-              login
-            </v-btn>
-            <v-app-bar-nav-icon
-              small
-              class="ml-4 hidden-md-and-up"
-              @click="toggleDrawer(true)"
-            ></v-app-bar-nav-icon>
+            </div>
+            <div v-else class="hidden-xs-only">
+              <v-btn to="/register" color="primary" class="ml-4" text>
+                register
+              </v-btn>
+              <v-btn to="/login" color="primary" class="ml-4" text>
+                login
+              </v-btn>
+            </div>
           </template>
         </v-row>
       </v-container>
@@ -76,6 +56,7 @@ export default {
   computed: {
     ...mapGetters({
       isLoggedIn: "auth/isLoggedIn",
+      verifyingUser: "auth/verifyingUser",
     }),
   },
   data() {

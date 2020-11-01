@@ -20,9 +20,9 @@ app.get("/", async (req, res, next) => {
   res.send("Express server");
 });
 
-app.use("/auth", require("./routes/auth"));
-app.use("/app", require("./routes/project"));
-app.use("/app", require("./routes/tasks"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/app", require("./routes/project"));
+app.use("/api/app", require("./routes/tasks"));
 
 app.use(async (req, res, next) => {
   next(createError.NotFound());

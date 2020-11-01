@@ -45,7 +45,8 @@
     },
     "rules": {
       "no-console": "off",
-      "no-unused-vars": "off"
+      "no-unused-vars": "warn",
+      "no-async-promise-executor": "off"
     }
   },
   "browserslist": [

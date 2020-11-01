@@ -3,7 +3,7 @@ import router from "../../router/";
 import { v4 as uuidv4 } from "uuid";
 
 const state = {
-  loading: false,
+  loading: true,
   created: false,
   allProjects: [
     {

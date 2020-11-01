@@ -4,7 +4,9 @@
     class="mx-auto pa-10 mb-10"
     elevation="0"
   >
-    <h1 class="display-1 mb-2 text-center">Welcome, {{ user.username }}</h1>
+    <h1 class="display-1 mb-2 text-center" v-if="user">
+      Welcome, {{ user.username }}
+    </h1>
     <p class="subtitle-1 mb-8 text-center">
       You can start by creating a project.
     </p>

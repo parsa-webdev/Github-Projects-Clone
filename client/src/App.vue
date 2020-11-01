@@ -9,10 +9,19 @@
 
 <script>
 import Header from "./components/Header";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "App",
   components: {
     Header,
+  },
+  methods: {
+    ...mapActions({
+      checkUser: "auth/checkUser",
+    }),
+  },
+  mounted() {
+    this.checkUser();
   },
 };
 </script>

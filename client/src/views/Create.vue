@@ -11,7 +11,7 @@
 import CreateProject from "../components/projects/CreateProject";
 import AllProjects from "../components/projects/AllProjects";
 export default {
-  name: "Dashboard",
+  name: "Create",
   components: {
     CreateProject,
     AllProjects,

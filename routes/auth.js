@@ -13,7 +13,7 @@ const { verifyAccessToken } = require("../helpers/jwt_helpers");
 router.post("/register", register);
 router.post("/login", login);
 router.delete("/logout", logout);
-router.post("/refreshtoken", refreshToken);
-router.post("/verifyuser", verifyAccessToken, verifyUser);
+router.get("/refreshtoken", refreshToken);
+router.get("/verifyuser", verifyAccessToken, verifyUser);
 
 module.exports = router;

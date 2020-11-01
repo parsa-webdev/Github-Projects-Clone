@@ -1,12 +1,10 @@
 import axios from "axios";
-
+import router from "../../router";
 const state = {
-  user: {
-    username: "Abir",
-  },
-  isLoggedIn: true,
+  user: null,
+  isLoggedIn: false,
   authenticating: false,
-  verifyingUser: false,
+  verifyingUser: true,
   errors: null,
 };
 
@@ -19,21 +17,56 @@ const getters = {
 };
 
 const actions = {
-  login({ commit }, args) {
-    console.log(args);
+  async checkUser({ commit }) {
+    try {
+      commit("authenticating", null);
+      const res = await axios.get("api/auth/verifyuser");
+      commit("authenticated", res.data);
+      console.log(res.data);
+    } catch (err) {
+      commit("setErrors", { unauthorized: "Unauthorized" });
+    }
   },
-  register({ commit }, args) {
-    console.log(args);
+  async login({ commit }, userInput) {
+    try {
+      commit("authenticating", null);
+
+      const res = await axios.post("api/auth/login", userInput);
+
+      commit("authenticated", res.data);
+
+      router.push("/create");
+    } catch (err) {
+      commit("setErrors", { login: err.response.data.error.message });
+    }
   },
-  logout({ commit }) {
-    console.log("logout");
-    commit("logout", null);
+  async logout({ commit }) {
+    try {
+      const res = await axios.delete("api/auth/logout");
+      console.log(res);
+      commit("logout", null);
+      router.push("/login");
+    } catch (err) {
+      console.log(err.response.data.error.message);
+    }
+  },
+  async register({ commit }, userInput) {
+    try {
+      commit("authenticating", null);
+
+      const res = await axios.post("api/auth/register", userInput);
+
+      commit("authenticated", res.data);
+      router.push("/create");
+    } catch (err) {
+      commit("setErrors", { register: err.response.data.error.message });
+    }
   },
 };
 
 const mutations = {
   verifyingUser: (state, value) => {
-    state.verifyingUser = true;
+    state.verifyingUser = false;
     state.errors = null;
   },
   authenticated: (state, user) => {
@@ -53,6 +86,7 @@ const mutations = {
   },
   logout: (state, value) => {
     state.authenticating = false;
+    state.verifyingUser = false;
     state.isLoggedIn = false;
     state.errors = null;
     state.user = null;

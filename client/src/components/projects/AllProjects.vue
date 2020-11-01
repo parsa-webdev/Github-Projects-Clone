@@ -1,6 +1,10 @@
 <template>
   <v-row class="justify-center">
-    <div v-for="project in projects" :key="project.id">
+    <!-- show loader if loading otherwise loop -->
+    <div v-if="loading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </div>
+    <div v-else v-for="project in projects" :key="project.id">
       <v-hover>
         <template v-slot:default="{ hover }">
           <v-card class="mx-3 mb-6" max-width="344" elevation="0">
@@ -39,7 +43,12 @@ export default {
   data: () => ({
     overlay: false,
   }),
-  computed: { ...mapGetters({ projects: "project/allProjects" }) },
+  computed: {
+    ...mapGetters({
+      projects: "project/allProjects",
+      loading: "project/loading",
+    }),
+  },
 };
 </script>
 

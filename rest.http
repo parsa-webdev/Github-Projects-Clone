@@ -1,14 +1,14 @@
 GET http://localhost:5000
 
 ### Verify user Route
-POST http://localhost:5000/auth/verifyuser
+GET http://localhost:5000/api/auth/verifyuser
 
 
 ### refresh token
-POST http://localhost:5000/auth/refreshtoken/
+GET http://localhost:5000/api/auth/refreshtoken/
 
 ### login route
-POST http://localhost:5000/auth/login
+POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
@@ -55,7 +55,7 @@ DELETE http://localhost:5000/app/task/5f71db5dca03a43498679505
 
 
 ### register route
-POST http://localhost:5000/auth/register
+POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
@@ -66,5 +66,5 @@ Content-Type: application/json
 
 
 ### logout route
-DELETE http://localhost:5000/auth/logout
+DELETE http://localhost:5000/api/auth/logout
 Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 eyJpYXQiOjE2MDEyMDkyMTUsImV4cCI6MTYzMjc2NjgxNSwiYXVkIjoiNWY2ZjMxZWY5YjVmM2QxYWM4OGQ3ODlmIiwiaXNzIjoicGFyc2Ftb3JzaGVkLm5ldGxpZnkuYXBwIn0.ztYtkTLm7xpK32KV_cX-QJtdxnx_50cFb07Vzo76d40
