@@ -23,11 +23,9 @@ export default function createAxiosResponseInterceptor() {
 
         try {
           await refreshToken();
-          return axios(error.response.config);
+          return axios(error.config);
         } catch (err) {
           return Promise.reject(error);
-        } finally {
-          createAxiosResponseInterceptor();
         }
       } else {
         return Promise.reject(error);

@@ -18,21 +18,21 @@ Content-Type: application/json
 
 
 ### get projects
-GET http://localhost:5000/app/projects/
+GET http://localhost:5000/api/app/projects/
 
 ### add project 
-POST http://localhost:5000/app/project/
+POST http://localhost:5000/api/app/project/
 Content-Type: application/json
 
 {
     "title": "Faded"
 }
 ### delete project 
-DELETE http://localhost:5000/app/project/5f717cd8b36f752bb83682ba
+DELETE http://localhost:5000/api/app/project/5f717cd8b36f752bb83682ba
 
 
 ### add task 
-POST http://localhost:5000/app/project/5f717cd8b36f752bb83682ba/task
+POST http://localhost:5000/api/app/project/5f717cd8b36f752bb83682ba/task
 Content-Type: application/json
 
 {
@@ -42,7 +42,7 @@ Content-Type: application/json
 
 
 ### edit task 
-PUT http://localhost:5000/app/task/5f71db5dca03a43498679505
+PUT http://localhost:5000/api/app/task/5f71db5dca03a43498679505
 Content-Type: application/json
 
 {
@@ -50,7 +50,7 @@ Content-Type: application/json
 }
 
 ### delete task 
-DELETE http://localhost:5000/app/task/5f71db5dca03a43498679505
+DELETE http://localhost:5000/api/app/task/5f71db5dca03a43498679505
 
 
 

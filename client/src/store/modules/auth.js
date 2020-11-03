@@ -20,11 +20,13 @@ const actions = {
   async checkUser({ commit }) {
     try {
       commit("authenticating", null);
-      const res = await axios.get("api/auth/verifyuser");
+      const res = await axios.get("api/auth/verifyuser", {
+        "Cache-Control": "no-cache",
+      });
       commit("authenticated", res.data);
       console.log(res.data);
     } catch (err) {
-      commit("setErrors", { unauthorized: "Unauthorized" });
+      commit("setErrors", { unauthorized: err.message });
     }
   },
   async login({ commit }, userInput) {

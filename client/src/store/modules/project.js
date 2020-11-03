@@ -3,22 +3,9 @@ import router from "../../router/";
 import { v4 as uuidv4 } from "uuid";
 
 const state = {
-  loading: true,
+  loading: false,
   created: false,
-  allProjects: [
-    {
-      id: uuidv4(),
-      title: "Hipstagram",
-    },
-    {
-      id: uuidv4(),
-      title: "Bitter",
-    },
-    {
-      id: uuidv4(),
-      title: "Cookuisines",
-    },
-  ],
+  allProjects: [],
   currentProject: null,
 };
 
@@ -30,6 +17,11 @@ const getters = {
 };
 
 const actions = {
+  async getProjects({ commit }, args) {
+    commit("loading", null);
+    const res = await axios.get("api/app/projects");
+    commit("setProjects", res.data);
+  },
   async createProject({ commit }, args) {
     commit("loading", null);
     const newProject = {
@@ -117,6 +109,10 @@ const mutations = {
     state.created = true;
     state.loading = false;
     state.allProjects = [newProject, ...state.allProjects];
+  },
+  setProjects: (state, projects) => {
+    state.loading = false;
+    state.allProjects = projects;
   },
   setCurrentProject: (state, project) => {
     state.currentProject = project;

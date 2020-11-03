@@ -18,10 +18,12 @@ export default {
   methods: {
     ...mapActions({
       checkUser: "auth/checkUser",
+      getProjects: "project/getProjects",
     }),
   },
-  mounted() {
-    this.checkUser();
+  async mounted() {
+    await this.checkUser();
+    this.getProjects();
   },
 };
 </script>

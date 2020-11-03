@@ -10,11 +10,20 @@
 <script>
 import CreateProject from "../components/projects/CreateProject";
 import AllProjects from "../components/projects/AllProjects";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "Create",
   components: {
     CreateProject,
     AllProjects,
+  },
+  methods: {
+    ...mapActions({
+      checkUser: "auth/checkUser",
+
+      getProjects: "project/getProjects",
+    }),
   },
 };
 </script>
