@@ -18,17 +18,31 @@ const getters = {
 
 const actions = {
   async getProjects({ commit }, args) {
-    commit("loading", null);
-    const res = await axios.get("api/app/projects");
-    commit("setProjects", res.data);
+    try {
+      commit("loading", null);
+      const res = await axios.get("api/app/projects");
+      commit("setProjects", res.data);
+    } catch (err) {
+      console.log(err.response);
+    }
   },
-  async createProject({ commit }, args) {
-    commit("loading", null);
-    const newProject = {
-      id: uuidv4(),
-      title: args.title,
-    };
-    commit("addProject", newProject);
+  async createProject({ commit }, userInput) {
+    try {
+      commit("loading", null);
+
+      const res = await axios.post("api/app/project/", userInput);
+
+      const project = {
+        id: res.data._id,
+        title: res.data.title,
+        author_id: res.data.author_id,
+        author_name: res.data.author_name,
+      };
+
+      commit("addProject", project);
+    } catch (err) {
+      console.log(err.response.data);
+    }
   },
   async getCurrentProject({ commit }, id) {
     try {
