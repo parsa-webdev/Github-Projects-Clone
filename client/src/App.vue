@@ -22,8 +22,12 @@ export default {
     }),
   },
   async mounted() {
-    await this.checkUser();
-    this.getProjects();
+    try {
+      await this.checkUser();
+      this.getProjects();
+    } catch (err) {
+      console.log(err.message);
+    }
   },
 };
 </script>

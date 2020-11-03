@@ -17,25 +17,30 @@ const getters = {
 };
 
 const actions = {
-  async checkUser({ commit }) {
-    try {
-      commit("authenticating", null);
-      const res = await axios.get("api/auth/verifyuser", {
-        "Cache-Control": "no-cache",
-      });
-      commit("authenticated", res.data);
-      console.log(res.data);
-    } catch (err) {
-      commit("setErrors", { unauthorized: err.message });
-    }
+  checkUser({ commit }) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        commit("authenticating", null);
+        const res = await axios.get("api/auth/verifyuser", {
+          "Cache-Control": "no-cache",
+        });
+        commit("authenticated", res.data);
+        resolve();
+      } catch (err) {
+        commit("setErrors", { unauthorized: err.message });
+        reject(new Error("Not Logged In"));
+      }
+    });
   },
-  async login({ commit }, userInput) {
+  async login({ commit, dispatch }, userInput) {
     try {
       commit("authenticating", null);
 
       const res = await axios.post("api/auth/login", userInput);
 
       commit("authenticated", res.data);
+
+      dispatch("project/getProjects", {}, { root: true });
 
       router.push("/create");
     } catch (err) {
