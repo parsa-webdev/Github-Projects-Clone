@@ -7,6 +7,9 @@
     >
       <h1 class="display-1 mb-8 text-center">Login</h1>
       <v-form v-model="valid" @submit.prevent="submitForm">
+        <v-alert type="error" v-if="errors && errors.login">{{
+          errors.login
+        }}</v-alert>
         <v-text-field
           label="Email"
           type="email"
@@ -64,7 +67,12 @@ export default {
       password: "",
     };
   },
-  computed: { ...mapGetters({ authenticating: "auth/authenticating" }) },
+  computed: {
+    ...mapGetters({
+      authenticating: "auth/authenticating",
+      errors: "auth/errors",
+    }),
+  },
   methods: {
     ...mapActions({
       login: "auth/login",

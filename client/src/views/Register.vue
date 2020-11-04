@@ -7,6 +7,9 @@
     >
       <h1 class="display-1 mb-8 text-center">Create an Account</h1>
       <v-form v-model="valid" @submit.prevent="submitForm">
+        <v-alert type="error" v-if="errors && errors.register">{{
+          errors.register
+        }}</v-alert>
         <v-text-field
           label="Username"
           type="text"
@@ -70,7 +73,13 @@ export default {
       password: "",
     };
   },
-  computed: { ...mapGetters({ authenticating: "auth/authenticating" }) },
+
+  computed: {
+    ...mapGetters({
+      authenticating: "auth/authenticating",
+      errors: "auth/errors",
+    }),
+  },
   methods: {
     ...mapActions({
       register: "auth/register",

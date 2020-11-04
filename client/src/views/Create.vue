@@ -18,13 +18,6 @@ export default {
     CreateProject,
     AllProjects,
   },
-  methods: {
-    ...mapActions({
-      checkUser: "auth/checkUser",
-
-      getProjects: "project/getProjects",
-    }),
-  },
 };
 </script>
 
