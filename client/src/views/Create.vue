@@ -2,7 +2,8 @@
   <v-container fill-height>
     <v-row class="flex-column justify-center">
       <CreateProject />
-      <AllProjects />
+      <!--  -->
+      <AllProjects v-if="!authenticating" />
     </v-row>
   </v-container>
 </template>
@@ -18,6 +19,7 @@ export default {
     CreateProject,
     AllProjects,
   },
+  computed: { ...mapGetters({ authenticating: "auth/authenticating" }) },
 };
 </script>
 

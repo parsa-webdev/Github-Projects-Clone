@@ -50,7 +50,7 @@ const actions = {
   async logout({ commit }) {
     try {
       const res = await axios.delete("api/auth/logout");
-      console.log(res);
+
       commit("logout", null);
       router.push("/login");
     } catch (err) {

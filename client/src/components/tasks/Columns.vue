@@ -1,5 +1,5 @@
 <template>
-  <v-row class="justify-center" no-gutters>
+  <v-row class="justify-center" no-gutters v-if="currentProject">
     <v-col class="ma-4">
       <Todo
         :tasks="currentProject.tasks.filter((i) => i.status === 'todo')"
@@ -31,7 +31,7 @@ import InProgress from "./InProgress";
 import Done from "./Done";
 
 export default {
-  name: "EachProject",
+  name: "Columns",
   components: {
     Todo,
     InProgress,
@@ -42,7 +42,12 @@ export default {
   //       myProject: null,
   //     };
   //   },
-  computed: { ...mapGetters({ currentProject: "project/currentProject" }) },
+  computed: {
+    ...mapGetters({
+      currentProject: "project/currentProject",
+      authenticating: "auth/authenticating",
+    }),
+  },
 
   methods: {
     ...mapActions({

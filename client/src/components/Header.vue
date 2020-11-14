@@ -4,7 +4,7 @@
       <v-container>
         <v-row>
           <router-link to="/">
-            <v-toolbar-title>Project Planner</v-toolbar-title>
+            <v-toolbar-title>PP</v-toolbar-title>
           </router-link>
 
           <v-spacer></v-spacer>

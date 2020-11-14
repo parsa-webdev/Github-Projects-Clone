@@ -36,12 +36,21 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters({
+      currentProject: "project/currentProject",
+    }),
+  },
   methods: {
     ...mapActions({
       createTask: "project/createTask",
     }),
     addTask() {
-      this.createTask({ note: this.task, status: this.status });
+      this.createTask({
+        projectID: this.currentProject.id,
+        note: this.task,
+        status: this.status,
+      });
     },
   },
 };

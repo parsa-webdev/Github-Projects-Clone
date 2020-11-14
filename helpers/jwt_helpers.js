@@ -8,7 +8,7 @@ module.exports = {
       const payload = {};
 
       const options = {
-        expiresIn: "30s",
+        expiresIn: "5s",
         issuer: "parsamorshed.netlify.app",
         audience: userId,
       };

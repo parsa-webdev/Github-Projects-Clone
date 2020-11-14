@@ -49,6 +49,14 @@ export default {
       loading: "project/loading",
     }),
   },
+  mounted() {
+    this.getProjects();
+  },
+  methods: {
+    ...mapActions({
+      getProjects: "project/getProjects",
+    }),
+  },
 };
 </script>
 

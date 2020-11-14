@@ -12,7 +12,7 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "abir@test.com",
+    "email": "test@test.com",
     "password": "testtest"
 }
 
@@ -32,12 +32,12 @@ DELETE http://localhost:5000/api/app/project/5f717cd8b36f752bb83682ba
 
 
 ### add task 
-POST http://localhost:5000/api/app/project/5f717cd8b36f752bb83682ba/task
+POST http://localhost:5000/api/app/project/5fa16174e49a2f266ca2ac72/task
 Content-Type: application/json
 
 {
-    "note": "Task 1",
-    "status": "todo"
+    "note": "Task 6",
+    "status": "done"
 }
 
 

@@ -15,19 +15,5 @@ export default {
   components: {
     Header,
   },
-  methods: {
-    ...mapActions({
-      checkUser: "auth/checkUser",
-      getProjects: "project/getProjects",
-    }),
-  },
-  async mounted() {
-    try {
-      await this.checkUser();
-      this.getProjects();
-    } catch (err) {
-      console.log(err.message);
-    }
-  },
 };
 </script>

@@ -3,10 +3,11 @@ import router from "../../router/";
 import { v4 as uuidv4 } from "uuid";
 
 const state = {
-  loading: false,
+  loading: true,
   created: false,
   allProjects: [],
   currentProject: null,
+  errors: null,
 };
 
 const getters = {
@@ -14,6 +15,7 @@ const getters = {
   created: (state) => state.created,
   allProjects: (state) => state.allProjects,
   currentProject: (state) => state.currentProject,
+  errors: (state) => state.errors,
 };
 
 const actions = {
@@ -23,7 +25,7 @@ const actions = {
       const res = await axios.get("api/app/projects");
       commit("setProjects", res.data);
     } catch (err) {
-      console.log(err.response);
+      commit("setErrors", { getProjects: err.response.data.error.message });
     }
   },
   async createProject({ commit }, userInput) {
@@ -48,76 +50,51 @@ const actions = {
     try {
       commit("loading", null);
 
-      const currentProject = {
-        id,
-        title: "Vintage Vinyls",
-        author_name: "Parsa",
-        author_id: uuidv4(),
-        tasks: [
-          {
-            id: uuidv4(),
-            note: "Fix Bug",
-            status: "todo",
-            project_id: uuidv4(),
-          },
-          {
-            id: uuidv4(),
-            note: "Fix Bsd",
-            status: "in-progress",
-            project_id: uuidv4(),
-          },
-          {
-            id: uuidv4(),
-            note: "Fix more Bug",
-            status: "todo",
-            project_id: uuidv4(),
-          },
-          {
-            id: uuidv4(),
-            note: "Add Feature",
-            status: "done",
-            project_id: uuidv4(),
-          },
-        ],
-      };
+      console.log(id);
 
-      // const currentTasks = currentProject.tasks;
+      const res = await axios.get(`api/app/project/${id}`);
 
-      commit("setCurrentProject", currentProject);
-      // commit("setCurrentTasks", currentTasks);
+      commit("setCurrentProject", res.data);
     } catch (err) {
-      console.log(err);
+      commit("setErrors", { currentProject: err.response.data.error.message });
     }
   },
   async createTask({ commit }, args) {
     try {
-      const newTask = {
-        id: uuidv4(),
+      const res = await axios.post(`api/app/project/${args.projectID}/task`, {
         note: args.note,
         status: args.status,
-        project_id: uuidv4(),
-      };
+      });
 
-      commit("addTask", newTask);
+      commit("addTask", res.data);
     } catch (err) {
       console.log(err);
     }
   },
   async deleteTask({ commit }, id) {
+    await axios.delete(`api/app/task/${id}`);
     commit("removeTask", id);
   },
   async updateTask({ commit }, args) {
+    await axios.put(`api/app/task/${args.id}`, {
+      status: args.status,
+    });
+
     commit("taskStatus", args);
   },
   async deleteProject({ commit }, id) {
+    await axios.delete(`api/app/project/${id}`);
     commit("removeProject", id);
-    router.push("/dashboard");
+    router.push("/create");
   },
 };
 
 const mutations = {
   loading: (state, status) => {
     state.loading = true;
+  },
+  setErrors: (state, err) => {
+    state.errors = err;
   },
   addProject: (state, newProject) => {
     state.created = true;
@@ -127,10 +104,12 @@ const mutations = {
   setProjects: (state, projects) => {
     state.loading = false;
     state.allProjects = projects;
+    state.errors = null;
   },
   setCurrentProject: (state, project) => {
     state.currentProject = project;
     state.loading = false;
+    state.errors = null;
   },
   addTask: (state, newTask) => {
     state.currentProject.tasks = [newTask, ...state.currentProject.tasks];
