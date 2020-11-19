@@ -28,7 +28,7 @@ const actions = {
         resolve();
       } catch (err) {
         commit("setErrors", { unauthorized: err.message });
-        reject(new Error("Not Logged In"));
+        resolve();
       }
     });
   },

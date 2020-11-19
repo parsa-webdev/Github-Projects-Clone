@@ -20,6 +20,7 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+
     meta: {
       authenticated: true,
     },
@@ -36,6 +37,14 @@ const routes = [
     path: "/create",
     name: "Create",
     component: Create,
+    // beforeEnter: async (to, from, next) => {
+    //   // const loggedIn = await store.dispatch("auth/checkUser");
+    //   if (store.state.isLoggedIn) {
+    //     next();
+    //   } else {
+    //     next("login");
+    //   }
+    // },
     meta: {
       requiresAuth: true,
     },
@@ -58,35 +67,54 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const authenticated = to.matched.some((record) => record.meta.authenticated);
+
   console.log({
     from: from.path,
     pathTo: to.path,
     requiresAuth,
     authenticated,
   });
-  try {
-    await store.dispatch("auth/checkUser");
+
+  await store.dispatch("auth/checkUser");
+
+  if (store.getters["auth/isLoggedIn"]) {
     if (authenticated) {
-      next("create");
+      // If we are in login/register
+      next({
+        name: "Create",
+      });
+    } else if (requiresAuth) {
+      // If we are in dashboard, project
+      next();
     } else {
+      // If we are in safe routes (home, 404)
       next();
     }
-  } catch (err) {
-    if (requiresAuth) {
-      next("login");
+  } else {
+    if (authenticated) {
+      // If we are in login/register
+      next();
+    } else if (requiresAuth) {
+      // If we are in dashboard, project
+      next({
+        name: "Login",
+      });
     } else {
+      // If we are in safe routes (home, 404)
       next();
     }
   }
 
   // if (requiresAuth) {
-  //   try {
-  //     await store.dispatch("auth/checkUser");
+  //   await store.dispatch("auth/checkUser");
+  //   next();
+  // } else {
+  //   next("login");
+  // }
 
-  //     next();
-  //   } catch (err) {
-  //     next("login");
-  //   }
+  // if (authenticated) {
+  //   await store.dispatch("auth/checkUser");
+  //   next("create");
   // } else {
   //   next();
   // }

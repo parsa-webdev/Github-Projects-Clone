@@ -7,7 +7,7 @@ import createAxiosResponseInterceptor from "./helpers/axios_interceptors";
 
 Vue.config.productionTip = false;
 
-createAxiosResponseInterceptor();
+Vue.use(createAxiosResponseInterceptor);
 
 new Vue({
   store,
