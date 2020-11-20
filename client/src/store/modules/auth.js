@@ -27,7 +27,7 @@ const actions = {
         commit("authenticated", res.data);
         resolve();
       } catch (err) {
-        commit("setErrors", { unauthorized: err.message });
+        commit("setErrors", { unauthorized: err.response.data.error.message });
         resolve();
       }
     });
@@ -90,6 +90,7 @@ const mutations = {
     state.errors = err;
     state.authenticating = false;
     state.verifyingUser = false;
+    state.isLoggedIn = false;
   },
   logout: (state, value) => {
     state.authenticating = false;

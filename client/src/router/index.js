@@ -68,12 +68,12 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const authenticated = to.matched.some((record) => record.meta.authenticated);
 
-  console.log({
-    from: from.path,
-    pathTo: to.path,
-    requiresAuth,
-    authenticated,
-  });
+  // console.log({
+  //   from: from.path,
+  //   pathTo: to.path,
+  //   requiresAuth,
+  //   authenticated,
+  // });
 
   await store.dispatch("auth/checkUser");
 

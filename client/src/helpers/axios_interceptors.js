@@ -15,6 +15,9 @@ export default function createAxiosResponseInterceptor() {
   const interceptor = axios.interceptors.response.use(
     (response) => response,
     async (error) => {
+      console.log(
+        `message: ${error.response.data.error.message}, status: ${error.response.status}`
+      );
       if (
         error.response.status === 401 &&
         error.response.data.error.message === "jwt expired"
