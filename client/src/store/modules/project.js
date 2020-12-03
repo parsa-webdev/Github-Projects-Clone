@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../helpers/axios_interceptors";
 import router from "../../router/";
 import { v4 as uuidv4 } from "uuid";
 
@@ -35,7 +35,7 @@ const actions = {
       const res = await axios.post("api/app/project/", userInput);
 
       const project = {
-        id: res.data._id,
+        id: res.data.id,
         title: res.data.title,
         author_id: res.data.author_id,
         author_name: res.data.author_name,

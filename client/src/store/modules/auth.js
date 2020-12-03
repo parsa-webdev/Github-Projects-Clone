@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../helpers/axios_interceptors";
 import router from "../../router";
 const state = {
   user: null,

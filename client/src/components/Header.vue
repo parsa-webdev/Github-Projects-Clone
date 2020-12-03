@@ -3,8 +3,8 @@
     <v-app-bar max-height="400" elevation="0" fixed style="z-index: 20">
       <v-container>
         <v-row>
-          <router-link to="/">
-            <v-toolbar-title>PP</v-toolbar-title>
+          <router-link to="/" style="text-decoration: none">
+            <v-toolbar-title>Project Planner</v-toolbar-title>
           </router-link>
 
           <v-spacer></v-spacer>
@@ -74,5 +74,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
