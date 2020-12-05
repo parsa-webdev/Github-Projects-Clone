@@ -37,14 +37,6 @@ const routes = [
     path: "/create",
     name: "Create",
     component: Create,
-    // beforeEnter: async (to, from, next) => {
-    //   // const loggedIn = await store.dispatch("auth/checkUser");
-    //   if (store.state.isLoggedIn) {
-    //     next();
-    //   } else {
-    //     next("login");
-    //   }
-    // },
     meta: {
       requiresAuth: true,
     },
