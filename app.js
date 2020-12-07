@@ -7,6 +7,10 @@ require("./helpers/init_mongodb");
 require("./helpers/init_redis");
 const path = require("path");
 
+dotenv.config();
+
+const app = express();
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 
@@ -14,10 +18,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
-dotenv.config();
-
-const app = express();
 
 app.use(morgan("dev"));
 
