@@ -17,14 +17,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", async (req, res, next) => {
-  res.send("Express server");
-});
-
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/app", require("./routes/project"));
-app.use("/api/app", require("./routes/tasks"));
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "/public/"));
 
@@ -32,6 +24,14 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "public", "index.html"));
   });
 }
+
+app.get("/", async (req, res, next) => {
+  res.send("Express server");
+});
+
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/app", require("./routes/project"));
+app.use("/api/app", require("./routes/tasks"));
 
 app.use(async (req, res, next) => {
   next(createError.NotFound());
