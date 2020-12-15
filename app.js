@@ -21,6 +21,14 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/app", require("./routes/project"));
 app.use("/api/app", require("./routes/tasks"));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/public/"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  });
+}
+
 app.use(async (req, res, next) => {
   next(createError.NotFound());
 });
@@ -34,14 +42,6 @@ app.use((err, req, res, next) => {
     },
   });
 });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(__dirname + "/public/"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"));
-  });
-}
 
 const PORT = process.env.PORT || 5000;
 
