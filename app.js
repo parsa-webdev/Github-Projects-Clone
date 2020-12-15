@@ -17,10 +17,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", async (req, res, next) => {
-  res.send("Express server");
-});
-
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/app", require("./routes/project"));
 app.use("/api/app", require("./routes/tasks"));
